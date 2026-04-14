@@ -6,6 +6,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 //@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 	"id",
@@ -20,14 +24,21 @@ public class Student {
 	@JsonProperty("id")
 	private long id;
 	@JsonProperty("rollNumber")
-	private int rollNumber;
+	private Integer rollNumber;
+	
 	@JsonProperty("name")
+	@NotBlank(message = "Name cannot be empty!!")
+	@Size(min = 3, max = 20, message = "Name must be 3-20 chars!!")
 	private String name;
+	
 	@JsonProperty("address")
 	private Address address;
+
 	@JsonProperty("isPresent")
 	private boolean isPresent;
+	
 	@JsonProperty("subjects")
+	@NotNull(message = "Subjects cannot be null!!")
 	private List<String> subjects;
 
 	public Student() {
